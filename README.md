@@ -2,7 +2,7 @@
 
 ## Clone this repo
 
-## Run NPM INSTALL to install dependencies
+### Run NPM INSTALL to install dependencies
 
 ## Run NPM RUN SERVER to start the server
 
