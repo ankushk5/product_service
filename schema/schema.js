@@ -36,23 +36,23 @@ const ProductType = new GraphQLObjectType({
   }),
 });
 
-const FileType = new GraphQLObjectType({
-  name: "File",
-  fields: () => ({
-    id: {
-      type: GraphQLID,
-    },
-    path: {
-      type: GraphQLString,
-    },
-    filename: {
-      type: GraphQLString,
-    },
-    mimetype: {
-      type: GraphQLString,
-    },
-  }),
-});
+// const FileType = new GraphQLObjectType({
+//   name: "File",
+//   fields: () => ({
+//     id: {
+//       type: GraphQLID,
+//     },
+//     path: {
+//       type: GraphQLString,
+//     },
+//     filename: {
+//       type: GraphQLString,
+//     },
+//     mimetype: {
+//       type: GraphQLString,
+//     },
+//   }),
+// });
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -72,10 +72,10 @@ const RootQuery = new GraphQLObjectType({
         return Product.findById(args.id);
       },
     },
-    uploads: {
-      type: FileType,
-      resolve(parent, args) {},
-    },
+    // uploads: {
+    //   type: FileType,
+    //   resolve(parent, args) {},
+    // },
   },
 });
 
@@ -98,15 +98,15 @@ const Mutation = new GraphQLObjectType({
         return product.save();
       },
     },
-    singleUpload: {
-      type: FileType,
-      args: {
-        file: {
-          type: GraphQLUpload,
-        },
-      },
-      resolve: (parent, { file }, { storeUpload }) => storeUpload(file),
-    },
+    // singleUpload: {
+    //   type: FileType,
+    //   args: {
+    //     file: {
+    //       type: GraphQLUpload,
+    //     },
+    //   },
+    //   resolve: (parent, { file }, { storeUpload }) => storeUpload(file),
+    // },
   },
 });
 
