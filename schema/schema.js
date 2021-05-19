@@ -1,4 +1,5 @@
 const graphql = require("graphql");
+const { GraphQLUpload } = require("graphql-upload");
 const Product = require("../models/Products");
 
 const {
@@ -35,14 +36,45 @@ const ProductType = new GraphQLObjectType({
   }),
 });
 
+const FileType = new GraphQLObjectType({
+  name: "File",
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+    },
+    path: {
+      type: GraphQLString,
+    },
+    filename: {
+      type: GraphQLString,
+    },
+    mimetype: {
+      type: GraphQLString,
+    },
+  }),
+});
+
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    Products: {
+    //getting all Products
+    products: {
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
         return Product.find({});
       },
+    },
+    //Getting single Product Using the product id
+    product: {
+      type: ProductType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Product.findById(args.id);
+      },
+    },
+    uploads: {
+      type: FileType,
+      resolve(parent, args) {},
     },
   },
 });
@@ -64,14 +96,16 @@ const Mutation = new GraphQLObjectType({
           productPrice: args.productPrice,
         });
         return product.save();
-        // let product = {
-        //   productName: args.productName,
-        //   productDescription: args.productDescription,
-        //   productPrice: args.productPrice,
-        // };
-        // products.push(product);
-        // return product;
       },
+    },
+    singleUpload: {
+      type: FileType,
+      args: {
+        file: {
+          type: GraphQLUpload,
+        },
+      },
+      resolve: (parent, { file }, { storeUpload }) => storeUpload(file),
     },
   },
 });
