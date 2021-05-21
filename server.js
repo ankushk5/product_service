@@ -4,8 +4,8 @@ const cors = require("cors");
 const { ApolloServer, gql } = require("apollo-server");
 const { buildFederatedSchema } = require("@apollo/federation");
 const { graphqlHTTP } = require("express-graphql");
-const schema = require("./schema/schema");
-const { typeDefs, resolvers } = require("./schema/TestSchema");
+// const schema = require("./schema/GraphQLSchema");
+const { typeDefs, resolvers } = require("./schema/Schema");
 
 app.use(cors());
 
