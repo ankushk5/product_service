@@ -9,7 +9,7 @@ const typeDefs = gql`
     review: String
     rating: Int
   }
-  type Product {
+  type Product @key(fields: "id") {
     id: ID
     productName: String
     productDescription: String
@@ -17,7 +17,7 @@ const typeDefs = gql`
     reviews: [Review]
   }
 
-  type Query {
+  extend type Query {
     products: [Product]
     product(id: ID!): Product
   }

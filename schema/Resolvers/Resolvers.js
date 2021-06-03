@@ -1,5 +1,5 @@
-const { addProduct, addReview } = require("./Mutations/Mutations");
-const { product, products } = require("./Queries/Queries");
+const { addProduct, addReview } = require("./Mutations/api/MutationApi");
+const { product, products } = require("./Queries/api/QueriesApi");
 
 const resolvers = {
   Query: {
@@ -10,5 +10,11 @@ const resolvers = {
     addProduct,
     addReview,
   },
+  //reference resolvers
+  // Product: {
+  //   __resolveReference(ref) {
+  //     return Products.findById(ref.id);
+  //   },
+  // },
 };
 module.exports = { resolvers };
