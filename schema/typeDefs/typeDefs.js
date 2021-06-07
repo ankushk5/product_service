@@ -17,9 +17,17 @@ const typeDefs = gql`
     reviews: [Review]
   }
 
+  type Cart {
+    id: ID
+    productName: String
+    productDescription: String
+    productPrice: Int
+  }
+
   extend type Query {
     products: [Product]
     product(id: ID!): Product
+    getCart: [Cart]
   }
   type Mutation {
     addProduct(
@@ -29,6 +37,12 @@ const typeDefs = gql`
     ): Product
 
     addReview(productid: ID, review: String, rating: Int): Product
+
+    addToCart(
+      productName: String
+      productDescription: String
+      productPrice: Int
+    ): Cart
   }
 `;
 module.exports = { typeDefs };

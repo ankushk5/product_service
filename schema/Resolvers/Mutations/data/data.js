@@ -1,4 +1,5 @@
 const Product = require("../../../../models/Products");
+const Cart = require("../../../../models/Cart");
 
 const addProductData = async (newProduct) => {
   const productdata = await new Product(newProduct);
@@ -21,4 +22,9 @@ const addReviewData = async (productid, newReview) => {
   return await updatedProduct.save();
 };
 
-module.exports = { addProductData, addReviewData };
+const addToCartData = async (cartItem) => {
+  const cartItemData = await new Cart(cartItem);
+  return await cartItemData.save();
+};
+
+module.exports = { addProductData, addReviewData, addToCartData };

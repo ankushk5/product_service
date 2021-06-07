@@ -1,4 +1,8 @@
-const { addProductLogic, addReviewLogic } = require("../logic/logic");
+const {
+  addProductLogic,
+  addReviewLogic,
+  addToCartLogic,
+} = require("../logic/logic");
 
 const addProduct = (parent, args, context, info) => {
   return addProductLogic(parent, args, context, info);
@@ -9,4 +13,8 @@ const addReview = async (parent, args, context, info) => {
   return updatedProduct;
 };
 
-module.exports = { addProduct, addReview };
+const addToCart = async (parent, args, context, info) => {
+  return addToCartLogic(parent, args, context, info);
+};
+
+module.exports = { addProduct, addReview, addToCart };

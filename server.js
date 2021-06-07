@@ -33,7 +33,7 @@ apolloServer.listen({ port }).then(({ url }) => {
 });
 
 app.get("/product", (req, res) => {
-  res.send("product service in your service");
+  res.send("product service in your service ");
 });
 
 app.listen(4001, () => {

@@ -1,14 +1,20 @@
-const { addProduct, addReview } = require("./Mutations/api/MutationApi");
-const { product, products } = require("./Queries/api/QueriesApi");
+const {
+  addProduct,
+  addReview,
+  addToCart,
+} = require("./Mutations/api/MutationApi");
+const { product, products, getCart } = require("./Queries/api/QueriesApi");
 
 const resolvers = {
   Query: {
     products,
     product,
+    getCart,
   },
   Mutation: {
     addProduct,
     addReview,
+    addToCart,
   },
   //reference resolvers
   // Product: {
