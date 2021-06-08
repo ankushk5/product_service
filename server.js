@@ -4,27 +4,20 @@ const cors = require("cors");
 const { ApolloServer, gql } = require("apollo-server");
 const { buildFederatedSchema } = require("@apollo/federation");
 const { graphqlHTTP } = require("express-graphql");
-// const schema = require("./schema/GraphQLSchema");
-const { typeDefs, resolvers } = require("./schema/Schema");
+// const { typeDefs, resolvers } = require("./schema/Schema");
+const { ProductSchema } = require("./src/product/api/schema");
+const { resolvers } = require("./src/GraphQL");
 
 app.use(cors());
 
 const connectDB = require("./config/db");
 connectDB();
 
-// app.use(
-//   "/graphql",
-//   graphqlHTTP({
-//     schema,
-//     graphiql: true,
-//   })
-// );
-
 const apolloServer = new ApolloServer({
-  schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+  schema: buildFederatedSchema([
+    { typeDefs: ProductSchema, resolvers: resolvers },
+  ]),
 });
-
-// const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
 const port = 5000;
 
