@@ -1,5 +1,5 @@
 const { typeDefs } = require("./typeDefs/typeDefs");
-const { resolvers } = require("./Resolvers/Resolvers");
+const { resolvers } = require("../src/GraphQL");
 
 module.exports = {
   typeDefs,

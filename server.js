@@ -3,28 +3,24 @@ const app = express();
 const cors = require("cors");
 const { ApolloServer, gql } = require("apollo-server");
 const { buildFederatedSchema } = require("@apollo/federation");
-const { graphqlHTTP } = require("express-graphql");
-// const schema = require("./schema/GraphQLSchema");
-const { typeDefs, resolvers } = require("./schema/Schema");
+const { ProductSchema } = require("./src/product/api/schema");
+const { CartSchema } = require("./src/cart/api/schema");
+const { resolvers } = require("./src/GraphQL");
+const { mergeTypes } = require("merge-graphql-schemas");
 
 app.use(cors());
 
 const connectDB = require("./config/db");
 connectDB();
 
-// app.use(
-//   "/graphql",
-//   graphqlHTTP({
-//     schema,
-//     graphiql: true,
-//   })
-// );
+// merging GraphQL Schemas
+const typeDefs = gql`
+  ${mergeTypes([ProductSchema, CartSchema])}
+`;
 
 const apolloServer = new ApolloServer({
-  schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+  schema: buildFederatedSchema([{ typeDefs: typeDefs, resolvers: resolvers }]),
 });
-
-// const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
 const port = 5000;
 
