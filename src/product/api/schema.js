@@ -18,8 +18,8 @@ const ProductSchema = gql`
   }
 
   type Query {
-    products: [Product]
-    product(id: ID!): Product
+    getAllProducts: [Product]
+    getProductById(id: ID!): Product
   }
   type Mutation {
     addProduct(
@@ -27,6 +27,15 @@ const ProductSchema = gql`
       productDescription: String
       productPrice: Int
     ): Product
+
+    updateProduct(
+      productID: ID
+      productName: String
+      productDescription: String
+      productPrice: Int
+    ): Product
+
+    deleteProduct(productID: ID): Product
 
     addReview(productid: ID, review: String, rating: Int): Product
   }
