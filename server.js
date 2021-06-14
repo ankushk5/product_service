@@ -1,27 +1,29 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-// const { ApolloServer } = require("apollo-server");
-// const { buildFederatedSchema } = require("@apollo/federation");
+const { ApolloServer, gql } = require("apollo-server");
+const { buildFederatedSchema } = require("@apollo/federation");
 const { graphqlHTTP } = require("express-graphql");
-const schema = require("./schema/schema");
+// const { typeDefs, resolvers } = require("./schema/Schema");
+const { ProductSchema } = require("./src/product/api/schema");
+const { resolvers } = require("./src/GraphQL");
 
 app.use(cors());
 
 const connectDB = require("./config/db");
 connectDB();
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
+const apolloServer = new ApolloServer({
+  schema: buildFederatedSchema([
+    { typeDefs: ProductSchema, resolvers: resolvers },
+  ]),
+});
 
-// const apolloServer = new ApolloServer({
-//   schema: buildFederatedSchema[{}],
-// });
+const port = 5000;
+
+apolloServer.listen({ port }).then(({ url }) => {
+  console.log(`Apollo Server ready at url ${url}`);
+});
 
 app.get("/product", (req, res) => {
   res.send("product service in your service");
