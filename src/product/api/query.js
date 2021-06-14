@@ -9,7 +9,7 @@ const product = (parent, args, context, info) => {
 };
 
 const ProductQuery = {
-  products: products,
-  product,
+  getAllProducts: products,
+  getProductById: product,
 };
 module.exports = { ProductQuery };
