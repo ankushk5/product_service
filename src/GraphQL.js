@@ -1,15 +1,17 @@
-// const { addProduct, addReview } = require("../schema/Resolvers/Mutations/api/MutationApi");
-// const { product, products } = require("../schema/Resolvers/Queries/api/QueriesApi");
-
 const { ProductMutation } = require("./product/api/mutation");
 const { ProductQuery } = require("./product/api/query");
+
+const { CartQuery } = require("./cart/api/query");
+const { CartMutation } = require("./cart/api/mutation");
 
 const resolvers = {
   Query: {
     ...ProductQuery,
+    ...CartQuery,
   },
   Mutation: {
     ...ProductMutation,
+    ...CartMutation,
   },
 };
 
