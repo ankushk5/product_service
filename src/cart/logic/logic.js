@@ -1,4 +1,13 @@
-const { addToCartData, getCartData } = require("../data/data");
+const {
+  addToCartData,
+  getCartData,
+  updateCartQuantityData,
+  deleteCartData,
+} = require("../data/data");
+
+const getCartLogic = () => {
+  return getCartData();
+};
 
 const addToCartLogic = (parent, args, context, info) => {
   const cartItem = {
@@ -9,8 +18,21 @@ const addToCartLogic = (parent, args, context, info) => {
   return addToCartData(cartItem);
 };
 
-const getCartLogic = () => {
-  return getCartData();
+const updateCartQuantityLogic = (parent, args, context, info) => {
+  const cartID = args.cartID;
+  const updatedCart = {
+    quantity: args.quantity,
+  };
+  return updateCartQuantityData(cartID, updatedCart);
 };
 
-module.exports = { addToCartLogic, getCartLogic };
+const deleteCartLogic = (parent, args, context, info) => {
+  const cartID = args.cartID;
+  return deleteCartData(cartID);
+};
+module.exports = {
+  addToCartLogic,
+  getCartLogic,
+  updateCartQuantityLogic,
+  deleteCartLogic,
+};
