@@ -1,32 +1,17 @@
-const { findByIdAndDelete } = require("../../../models/Products");
 const Product = require("../../../models/Products");
 
-const productsData = () => {
+const getAllProductsData = () => {
   return Product.find({});
 };
 
-const productData = (id) => {
-  return Product.findById(id);
+const getProductByIdData = (id) => {
+  //Need to populate the Product reviews
+  return Product.findById(id).populate("reviews");
 };
 
 const addProductData = async (newProduct) => {
-  const productdata = await new Product(newProduct);
+  const productdata = new Product(newProduct);
   return await productdata.save();
-};
-
-const addReviewData = async (productid, newReview) => {
-  let updatedProduct = await Product.findOneAndUpdate(
-    { _id: productid },
-    {
-      $push: {
-        reviews: newReview,
-      },
-    },
-    {
-      new: true,
-    }
-  );
-  return await updatedProduct.save();
 };
 
 const updateProductData = async (productID, updatedProduct) => {
@@ -52,10 +37,9 @@ const deleteProductData = async (productID) => {
 };
 
 module.exports = {
-  productsData,
-  productData,
+  getAllProductsData,
+  getProductByIdData,
   addProductData,
-  addReviewData,
   updateProductData,
   deleteProductData,
 };

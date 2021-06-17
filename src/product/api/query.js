@@ -1,15 +1,15 @@
-const { ProductLogic, ProductsLogic } = require("../logic/logic");
+const { getProductByIdLogic, getAllProductsLogic } = require("../logic/logic");
 
-const products = () => {
-  return ProductsLogic();
+const getAllProducts = () => {
+  return getAllProductsLogic();
 };
 
-const product = (parent, args, context, info) => {
-  return ProductLogic(parent, args, context, info);
+const getProductById = (parent, args, context, info) => {
+  return getProductByIdLogic(parent, args, context, info);
 };
 
 const ProductQuery = {
-  getAllProducts: products,
-  getProductById: product,
+  getAllProducts: getAllProducts,
+  getProductById: getProductById,
 };
 module.exports = { ProductQuery };

@@ -7,8 +7,8 @@ const ProductSchema = new Schema({
   productPrice: Number,
   reviews: [
     {
-      review: String,
-      rating: Number,
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
   ],
 });

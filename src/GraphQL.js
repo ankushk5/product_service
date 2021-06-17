@@ -3,6 +3,7 @@ const { ProductQuery } = require("./product/api/query");
 
 const { CartQuery } = require("./cart/api/query");
 const { CartMutation } = require("./cart/api/mutation");
+const { ReviewMutation } = require("./review/api/mutation");
 
 const resolvers = {
   Query: {
@@ -12,6 +13,7 @@ const resolvers = {
   Mutation: {
     ...ProductMutation,
     ...CartMutation,
+    ...ReviewMutation,
   },
 };
 
