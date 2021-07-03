@@ -5,6 +5,7 @@ const { ApolloServer, gql } = require("apollo-server");
 const { buildFederatedSchema } = require("@apollo/federation");
 const { ProductSchema } = require("./src/product/api/schema");
 const { CartSchema } = require("./src/cart/api/schema");
+const { ReviewSchema } = require("./src/review/api/schema");
 const { resolvers } = require("./src/GraphQL");
 const { mergeTypes } = require("merge-graphql-schemas");
 
@@ -15,7 +16,7 @@ connectDB();
 
 // merging GraphQL Schemas
 const typeDefs = gql`
-  ${mergeTypes([ProductSchema, CartSchema])}
+  ${mergeTypes([ProductSchema, CartSchema, ReviewSchema])}
 `;
 
 const apolloServer = new ApolloServer({

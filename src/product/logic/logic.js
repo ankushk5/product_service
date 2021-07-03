@@ -1,17 +1,17 @@
 const {
-  productsData,
-  productData,
+  getAllProductsData,
+  getProductByIdData,
   updateProductData,
   deleteProductData,
+  addProductData,
 } = require("../data/data");
-const { addProductData, addReviewData } = require("../data/data");
 
-const ProductsLogic = () => {
-  return productsData();
+const getAllProductsLogic = () => {
+  return getAllProductsData();
 };
 
-const ProductLogic = (parent, args, context, info) => {
-  return productData(args.id);
+const getProductByIdLogic = (parent, args, context, info) => {
+  return getProductByIdData(args.id);
 };
 
 const addProductLogic = (parent, args, context, info) => {
@@ -38,19 +38,9 @@ const deleteProductLogic = (parent, args, context, info) => {
   return deleteProductData(productID);
 };
 
-const addReviewLogic = (parent, args, context, info) => {
-  let productid = args.productid;
-  let newReview = {
-    review: args.review,
-    rating: args.rating,
-  };
-  return addReviewData(productid, newReview);
-};
-
 module.exports = {
-  ProductsLogic,
-  ProductLogic,
-  addReviewLogic,
+  getAllProductsLogic,
+  getProductByIdLogic,
   addProductLogic,
   updateProductLogic,
   deleteProductLogic,

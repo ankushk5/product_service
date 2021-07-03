@@ -1,14 +1,6 @@
 const { gql } = require("apollo-server");
 
 const ProductSchema = gql`
-  type Review {
-    review: String
-    rating: Int
-  }
-  input InputReview {
-    review: String
-    rating: Int
-  }
   type Product {
     id: ID
     productName: String
@@ -36,8 +28,6 @@ const ProductSchema = gql`
     ): Product
 
     deleteProduct(productID: ID): Product
-
-    addReview(productid: ID, review: String, rating: Int): Product
   }
 `;
 module.exports = { ProductSchema };

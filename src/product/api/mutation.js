@@ -1,6 +1,5 @@
 const {
   addProductLogic,
-  addReviewLogic,
   updateProductLogic,
   deleteProductLogic,
 } = require("../logic/logic");
@@ -17,16 +16,10 @@ const deleteProduct = async (parent, args, context, info) => {
   return deleteProductLogic(parent, args, context, info);
 };
 
-const addReview = async (parent, args, context, info) => {
-  const updatedProduct = addReviewLogic(parent, args, context, info);
-  return updatedProduct;
-};
-
 const ProductMutation = {
   addProduct,
   updateProduct,
   deleteProduct,
-  addReview,
 };
 
 module.exports = { ProductMutation };
