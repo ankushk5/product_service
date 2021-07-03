@@ -9,4 +9,31 @@ const addToCartData = async (cartItem) => {
   return await cartItemData.save();
 };
 
-module.exports = { getCartData, addToCartData };
+const updateCartQuantityData = async (cartID, updatedCart) => {
+  let updatedCartData = await Cart.findOneAndUpdate(
+    { _id: cartID },
+    { $set: { ...updatedCart } },
+    {
+      new: true,
+    }
+  );
+  return updatedCartData;
+};
+
+const deleteCartData = async (cartID) => {
+  try {
+    const result = await Cart.findByIdAndDelete(cartID);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return ` Error ${error} `;
+  }
+};
+
+module.exports = {
+  getCartData,
+  addToCartData,
+  updateCartQuantityData,
+  deleteCartData,
+};

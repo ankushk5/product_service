@@ -6,6 +6,7 @@ const CartSchema = gql`
     productName: String
     productDescription: String
     productPrice: Int
+    quantity: Int
   }
   extend type Query {
     getCart: [Cart]
@@ -16,6 +17,10 @@ const CartSchema = gql`
       productDescription: String
       productPrice: Int
     ): Cart
+
+    updateCartQuantity(cartID: ID, quantity: Int): Cart
+
+    deleteCart(cartID: ID): Cart
   }
 `;
 module.exports = { CartSchema };
