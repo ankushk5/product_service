@@ -13,6 +13,8 @@ const ReviewSchema = gql`
   }
   extend type Mutation {
     addReview(productID: ID, review: String, rating: Int): Review
+    updateReview(id: ID, review: String, rating: Int): Review
+    deleteReview(id: ID, productID: ID): Review
   }
 `;
 module.exports = { ReviewSchema };

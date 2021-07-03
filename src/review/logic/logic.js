@@ -1,4 +1,8 @@
-const { addReviewData } = require("../data/data");
+const {
+  addReviewData,
+  updateReviewData,
+  deleteReviewData,
+} = require("../data/data");
 
 const addReviewLogic = (parent, args, context, info) => {
   const newReview = {
@@ -9,19 +13,19 @@ const addReviewLogic = (parent, args, context, info) => {
   return addReviewData(newReview);
 };
 
-module.exports = { addReviewLogic };
+const updateReviewLogic = (parent, args, context, info) => {
+  const reviewID = args.id;
+  const updatedReview = {
+    review: args.review,
+    rating: args.rating,
+  };
+  return updateReviewData(reviewID, updatedReview);
+};
 
-// const addReviewData = async (productid, newReview) => {
-//   let updatedProduct = await Product.findOneAndUpdate(
-//     { _id: productid },
-//     {
-//       $push: {
-//         reviews: newReview,
-//       },
-//     },
-//     {
-//       new: true,
-//     }
-//   );
-//   return await updatedProduct.save();
-// };
+const deleteReviewLogic = (parent, args, context, info) => {
+  const reviewID = args.id;
+  const productID = args.productID;
+  return deleteReviewData(reviewID, productID);
+};
+
+module.exports = { addReviewLogic, updateReviewLogic, deleteReviewLogic };
