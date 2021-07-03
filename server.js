@@ -26,7 +26,7 @@ const apolloServer = new ApolloServer({
 const port = 5000;
 
 apolloServer.listen({ port }).then(({ url }) => {
-  console.log(`Apollo Server ready at url ${url}`);
+  console.log(`Product's Apollo  Server ready at url ${url}`);
 });
 
 app.get("/product", (req, res) => {
@@ -34,5 +34,5 @@ app.get("/product", (req, res) => {
 });
 
 app.listen(4001, () => {
-  console.log("server listening to port 4001");
+  console.log("Product server listening to port 4001");
 });
