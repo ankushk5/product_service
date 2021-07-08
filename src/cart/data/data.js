@@ -6,6 +6,7 @@ const getCartData = () => {
 
 const addToCartData = async (cartItem) => {
   const cartItemData = await new Cart(cartItem);
+
   return await cartItemData.save();
 };
 
