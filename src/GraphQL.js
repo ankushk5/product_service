@@ -4,6 +4,7 @@ const { ProductQuery } = require("./product/api/query");
 const { CartQuery } = require("./cart/api/query");
 const { CartMutation } = require("./cart/api/mutation");
 const { ReviewMutation } = require("./review/api/mutation");
+const { getProductByIdData } = require("./product/data/data");
 
 const resolvers = {
   Query: {
@@ -14,6 +15,12 @@ const resolvers = {
     ...ProductMutation,
     ...CartMutation,
     ...ReviewMutation,
+  },
+  Product: {
+    __resolveReference(ref) {
+      console.log(ref);
+      return getProductByIdData(ref.id);
+    },
   },
 };
 

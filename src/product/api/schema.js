@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server");
 
 const ProductSchema = gql`
-  type Product {
+  type Product @key(fields: "id") {
     id: ID
     productName: String
     productDescription: String
