@@ -4,6 +4,7 @@ const {
   updateProductData,
   deleteProductData,
   addProductData,
+  getMultipleProductsData,
 } = require("../data/data");
 
 const getAllProductsLogic = () => {
@@ -12,6 +13,10 @@ const getAllProductsLogic = () => {
 
 const getProductByIdLogic = (parent, args, context, info) => {
   return getProductByIdData(args.id);
+};
+
+const getMultipleProductsLogic = (parent, args, context, info) => {
+  return getMultipleProductsData(args.productIDArray);
 };
 
 const addProductLogic = (parent, args, context, info) => {
@@ -41,6 +46,7 @@ const deleteProductLogic = (parent, args, context, info) => {
 module.exports = {
   getAllProductsLogic,
   getProductByIdLogic,
+  getMultipleProductsLogic,
   addProductLogic,
   updateProductLogic,
   deleteProductLogic,
