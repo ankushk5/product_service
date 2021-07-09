@@ -11,6 +11,7 @@ const getCartLogic = () => {
 
 const addToCartLogic = (parent, args, context, info) => {
   const cartItem = {
+    productID: args.productID,
     productName: args.productName,
     productDescription: args.productDescription,
     productPrice: args.productPrice,

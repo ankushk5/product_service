@@ -12,7 +12,9 @@ const ProductSchema = gql`
   type Query {
     getAllProducts: [Product]
     getProductById(id: ID!): Product
+    getMultipleProducts(productIDArray: [ID]): [Product]
   }
+
   type Mutation {
     addProduct(
       productName: String
