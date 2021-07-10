@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server");
 
 const CartSchema = gql`
-  type Cart {
+  type Cart @key(fields: "productID") {
     id: ID
     productID: ID
     productName: String
@@ -11,6 +11,7 @@ const CartSchema = gql`
   }
   extend type Query {
     getCart: [Cart]
+    getCartItemByProductId(productID: ID): Cart
   }
   extend type Mutation {
     addToCart(
