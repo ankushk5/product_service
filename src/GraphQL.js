@@ -18,6 +18,8 @@ const resolvers = {
   },
   /**
    * reference resolver for the Product Schema
+   * @param ID
+   * @returns corresponding product Data
    */
   Product: {
     __resolveReference(ref) {
