@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server");
 
 const CartSchema = gql`
-  type Cart @key(fields: "productID") {
+  type Cart {
     id: ID
     productID: ID
     productName: String
