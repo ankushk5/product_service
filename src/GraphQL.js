@@ -16,9 +16,11 @@ const resolvers = {
     ...CartMutation,
     ...ReviewMutation,
   },
+  /**
+   * reference resolver for the Product Schema
+   */
   Product: {
     __resolveReference(ref) {
-      console.log(ref);
       return getProductByIdData(ref.id);
     },
   },

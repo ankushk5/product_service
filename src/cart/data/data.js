@@ -1,7 +1,11 @@
 const Cart = require("../../../models/Cart");
 
-const getCartData = () => {
-  return Cart.find({});
+const getCartData = async () => {
+  return await Cart.find({});
+};
+
+const getCartItemByProductIdLogicData = async (productID) => {
+  return await Cart.findOne({ productID: productID });
 };
 
 const addToCartData = async (cartItem) => {
@@ -34,6 +38,7 @@ const deleteCartData = async (cartID) => {
 
 module.exports = {
   getCartData,
+  getCartItemByProductIdLogicData,
   addToCartData,
   updateCartQuantityData,
   deleteCartData,

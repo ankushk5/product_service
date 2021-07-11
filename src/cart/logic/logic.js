@@ -3,10 +3,15 @@ const {
   getCartData,
   updateCartQuantityData,
   deleteCartData,
+  getCartItemByProductIdLogicData,
 } = require("../data/data");
 
 const getCartLogic = () => {
   return getCartData();
+};
+
+const getCartItemByProductIdLogic = (parent, args, context, info) => {
+  return getCartItemByProductIdLogicData(args.productID);
 };
 
 const addToCartLogic = (parent, args, context, info) => {
@@ -33,6 +38,7 @@ const deleteCartLogic = (parent, args, context, info) => {
 };
 module.exports = {
   addToCartLogic,
+  getCartItemByProductIdLogic,
   getCartLogic,
   updateCartQuantityLogic,
   deleteCartLogic,

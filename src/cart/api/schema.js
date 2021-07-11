@@ -11,6 +11,7 @@ const CartSchema = gql`
   }
   extend type Query {
     getCart: [Cart]
+    getCartItemByProductId(productID: ID): Cart
   }
   extend type Mutation {
     addToCart(
