@@ -11,7 +11,6 @@ const getProductByIdData = async (id) => {
 
 const getMultipleProductsData = async (productIDArray) => {
   const data = await Product.find({ _id: { $in: productIDArray } });
-  console.log(data);
   return data;
 };
 
@@ -34,10 +33,8 @@ const updateProductData = async (productID, updatedProduct) => {
 const deleteProductData = async (productID) => {
   try {
     const result = await Product.findByIdAndDelete(productID);
-    console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
     return ` Error ${error} `;
   }
 };

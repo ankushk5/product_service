@@ -28,10 +28,8 @@ const updateCartQuantityData = async (cartID, updatedCart) => {
 const deleteCartData = async (cartID) => {
   try {
     const result = await Cart.findByIdAndDelete(cartID);
-    console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
     return ` Error ${error} `;
   }
 };
