@@ -1,3 +1,4 @@
+const { ValidationError } = require("apollo-server");
 const Cart = require("../../../models/Cart");
 
 const getCartData = async () => {
@@ -8,7 +9,13 @@ const getCartItemByProductIdLogicData = async (productID) => {
   return await Cart.findOne({ productID: productID });
 };
 
-const addToCartData = async (cartItem) => {
+const addToCartData = async (cartItem, productID) => {
+  /** Checking is there any cart item with the same product id or not */
+  const isAlreadyExist = await Cart.findOne({ productID: productID });
+  if (isAlreadyExist) {
+    throw Error("Already Added To Cart");
+  }
+
   const cartItemData = await new Cart(cartItem);
 
   return await cartItemData.save();

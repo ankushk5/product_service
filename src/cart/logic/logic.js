@@ -21,7 +21,7 @@ const addToCartLogic = (parent, args, context, info) => {
     productDescription: args.productDescription,
     productPrice: args.productPrice,
   };
-  return addToCartData(cartItem);
+  return addToCartData(cartItem, args.productID);
 };
 
 const updateCartQuantityLogic = (parent, args, context, info) => {
