@@ -1,3 +1,4 @@
+const { ValidationError } = require("apollo-server");
 const {
   getAllProductsData,
   getProductByIdData,
@@ -20,6 +21,8 @@ const getMultipleProductsLogic = (parent, args, context, info) => {
 };
 
 const addProductLogic = (parent, args, context, info) => {
+  const { productName, productPrice, productDescription } = args;
+
   const newProduct = {
     productName: args.productName,
     productDescription: args.productDescription,
