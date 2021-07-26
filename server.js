@@ -1,15 +1,19 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { ApolloServer, gql } = require("apollo-server");
+const { ApolloServer, gql } = require("apollo-server-express");
 const { buildFederatedSchema } = require("@apollo/federation");
 const { ProductSchema } = require("./src/product/api/schema");
 const { CartSchema } = require("./src/cart/api/schema");
 const { ReviewSchema } = require("./src/review/api/schema");
 const { resolvers } = require("./src/GraphQL");
 const { mergeTypes } = require("merge-graphql-schemas");
+const { graphqlUploadExpress } = require("graphql-upload");
 
 app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const connectDB = require("./config/db");
 connectDB();
@@ -21,18 +25,27 @@ const typeDefs = gql`
 
 const apolloServer = new ApolloServer({
   schema: buildFederatedSchema([{ typeDefs: typeDefs, resolvers: resolvers }]),
+  subscriptions: false,
+  uploads: false,
+  /** passing context to every resolver */
+  context: ({ req }) => {
+    const user = req.headers.user ? JSON.parse(req.headers.user) : null;
+    return { user };
+  },
 });
 
-const port = 5000;
+app.use(graphqlUploadExpress());
 
-apolloServer.listen({ port }).then(({ url }) => {
-  console.log(`Product's Apollo  Server ready at url ${url}`);
-});
+async function startServer() {
+  await apolloServer.start();
 
-app.get("/product", (req, res) => {
-  res.send("product service running ");
-});
+  apolloServer.applyMiddleware({ app });
 
-app.listen(4001, () => {
-  console.log("Product server listening to port 4001");
-});
+  await app.listen({ port: 4001 });
+
+  console.log(
+    `🚀 Server ready at http://localhost:4001${apolloServer.graphqlPath}`
+  );
+}
+
+startServer();
