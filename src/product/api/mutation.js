@@ -1,3 +1,4 @@
+const { requiresRole } = require("../../utils/requireRole");
 const {
   addProductLogic,
   updateProductLogic,
@@ -26,7 +27,7 @@ const uploadFile = async (parent, { file }, context, info) => {
 };
 
 const ProductMutation = {
-  addProduct,
+  addProduct: requiresRole("vendor", addProduct),
   updateProduct,
   deleteProduct,
   uploadFile: uploadFile,
