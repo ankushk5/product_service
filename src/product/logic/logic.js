@@ -1,4 +1,6 @@
-const { ValidationError } = require("apollo-server");
+const { createWriteStream } = require("fs");
+const path = require("path");
+
 const {
   getAllProductsData,
   getProductByIdData,
@@ -46,6 +48,18 @@ const deleteProductLogic = (parent, args, context, info) => {
   return deleteProductData(productID);
 };
 
+const uploadFileLogic = async (file) => {
+  // const { filename, mimetype, encoding, createReadStream } = await file;
+  // console.log(filename);
+  // try {
+  //   const stream = createReadStream(__dirname);
+  //   console.log(stream);
+  // } catch (error) {
+  //   throw error;
+  // }
+  // return { filename, mimetype, encoding };
+};
+
 module.exports = {
   getAllProductsLogic,
   getProductByIdLogic,
@@ -53,4 +67,5 @@ module.exports = {
   addProductLogic,
   updateProductLogic,
   deleteProductLogic,
+  uploadFileLogic,
 };
