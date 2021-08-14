@@ -20,6 +20,7 @@ const ProductSchema = gql`
   extend type Query {
     getAllProducts: [Product]
     getProductById(id: ID!): Product
+    getProductsBySearchText(searchText: String!): [Product]
     getMultipleProducts(productIDArray: [ID]): [Product]
   }
 
