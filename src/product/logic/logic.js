@@ -8,6 +8,7 @@ const {
   deleteProductData,
   addProductData,
   getMultipleProductsData,
+  getProductsBySearchTextData,
 } = require("../data/data");
 
 const getAllProductsLogic = () => {
@@ -16,6 +17,10 @@ const getAllProductsLogic = () => {
 
 const getProductByIdLogic = (parent, args, context, info) => {
   return getProductByIdData(args.id);
+};
+
+const getProductsBySearchTextLogic = (parent, args, context, info) => {
+  return getProductsBySearchTextData(args.searchText);
 };
 
 const getMultipleProductsLogic = (parent, args, context, info) => {
@@ -63,6 +68,7 @@ const uploadFileLogic = async (file) => {
 module.exports = {
   getAllProductsLogic,
   getProductByIdLogic,
+  getProductsBySearchTextLogic,
   getMultipleProductsLogic,
   addProductLogic,
   updateProductLogic,

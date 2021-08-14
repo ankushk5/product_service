@@ -9,6 +9,10 @@ const getProductByIdData = async (id) => {
   return await Product.findById(id).populate("reviews");
 };
 
+const getProductsBySearchTextData = async (searchText) => {
+  return await Product.find({ $text: { $search: searchText } });
+};
+
 const getMultipleProductsData = async (productIDArray) => {
   const data = await Product.find({ _id: { $in: productIDArray } });
   return data;
@@ -42,6 +46,7 @@ const deleteProductData = async (productID) => {
 module.exports = {
   getAllProductsData,
   getProductByIdData,
+  getProductsBySearchTextData,
   getMultipleProductsData,
   addProductData,
   updateProductData,
