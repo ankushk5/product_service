@@ -8,6 +8,9 @@ const ProductSchema = gql`
     productName: String
     productDescription: String
     productPrice: Int
+    productCategory: String
+    productSubCategory: String
+    productBrand: String
     reviews: [Review]
   }
 
@@ -29,6 +32,9 @@ const ProductSchema = gql`
       productName: String
       productDescription: String
       productPrice: Int
+      productCategory: String
+      productSubCategory: String
+      productBrand: String
     ): Product
 
     updateProduct(
@@ -36,6 +42,9 @@ const ProductSchema = gql`
       productName: String
       productDescription: String
       productPrice: Int
+      productCategory: String
+      productSubCategory: String
+      productBrand: String
     ): Product
 
     deleteProduct(productID: ID): Product

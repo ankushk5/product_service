@@ -28,24 +28,39 @@ const getMultipleProductsLogic = (parent, args, context, info) => {
 };
 
 const addProductLogic = (parent, args, context, info) => {
-  const { productName, productPrice, productDescription } = args;
+  const {
+    productName,
+    productPrice,
+    productDescription,
+    productCategory,
+    productSubCategory,
+    productBrand,
+  } = args;
 
   const newProduct = {
-    productName: args.productName,
-    productDescription: args.productDescription,
-    productPrice: args.productPrice,
+    productName,
+    productPrice,
+    productDescription,
+    productCategory,
+    productSubCategory,
+    productBrand,
   };
   return addProductData(newProduct);
 };
 
 const updateProductLogic = (parent, args, context, info) => {
   const productID = args.productID;
-  const updatedProduct = {
+
+  const productDetailsToUpdate = {
     productName: args.productName,
     productDescription: args.productDescription,
     productPrice: args.productPrice,
+    productCategory: args.productCategory,
+    productSubCategory: args.productSubCategory,
+    productBrand: args.productBrand,
   };
-  return updateProductData(productID, updatedProduct);
+
+  return updateProductData(productID, productDetailsToUpdate);
 };
 
 const deleteProductLogic = (parent, args, context, info) => {

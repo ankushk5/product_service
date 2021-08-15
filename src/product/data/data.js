@@ -23,10 +23,10 @@ const addProductData = async (newProduct) => {
   return await productdata.save();
 };
 
-const updateProductData = async (productID, updatedProduct) => {
+const updateProductData = async (productID, productDetailsToUpdate) => {
   let updatedProductData = await Product.findOneAndUpdate(
     { _id: productID },
-    { $set: { ...updatedProduct } },
+    { $set: { ...productDetailsToUpdate } },
     {
       new: true,
     }

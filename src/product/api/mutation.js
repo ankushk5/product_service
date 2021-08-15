@@ -27,7 +27,8 @@ const uploadFile = async (parent, { file }, context, info) => {
 };
 
 const ProductMutation = {
-  addProduct: requiresRole("vendor", addProduct),
+  // addProduct: requiresRole("vendor", addProduct), // to make api authorized
+  addProduct,
   updateProduct,
   deleteProduct,
   uploadFile: uploadFile,
