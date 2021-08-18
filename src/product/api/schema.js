@@ -3,12 +3,22 @@ const { gql } = require("apollo-server-express");
 const ProductSchema = gql`
   scalar Upload
 
+  type ProductCategory {
+    categoryId: Int
+    categoryName: String
+  }
+
+  input ProductCategoryInput {
+    categoryId: Int
+    categoryName: String
+  }
+
   type Product @key(fields: "id") {
     id: ID
     productName: String
     productDescription: String
     productPrice: Int
-    productCategory: String
+    productCategory: ProductCategory
     productSubCategory: String
     productBrand: String
     reviews: [Review]
@@ -32,7 +42,7 @@ const ProductSchema = gql`
       productName: String
       productDescription: String
       productPrice: Int
-      productCategory: String
+      productCategory: ProductCategoryInput
       productSubCategory: String
       productBrand: String
     ): Product
@@ -42,7 +52,7 @@ const ProductSchema = gql`
       productName: String
       productDescription: String
       productPrice: Int
-      productCategory: String
+      productCategory: ProductCategoryInput
       productSubCategory: String
       productBrand: String
     ): Product

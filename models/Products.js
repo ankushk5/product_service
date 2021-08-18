@@ -5,7 +5,10 @@ const ProductSchema = new Schema({
   productName: String,
   productDescription: String,
   productPrice: Number,
-  productCategory: String,
+  productCategory: {
+    categoryId: Number,
+    categoryName: String,
+  },
   productSubCategory: String,
   productBrand: String,
   reviews: [
