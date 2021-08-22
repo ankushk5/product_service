@@ -1,92 +1,76 @@
-const { createWriteStream } = require("fs");
-const path = require("path");
+const { productData } = require("../data/data");
 
-const {
-  getAllProductsData,
-  getProductByIdData,
-  updateProductData,
-  deleteProductData,
-  addProductData,
-  getMultipleProductsData,
-  getProductsBySearchTextData,
-} = require("../data/data");
+const productLogic = {
+  /* For Queries */
 
-const getAllProductsLogic = () => {
-  return getAllProductsData();
-};
+  getAll: () => {
+    return productData.getAll();
+  },
+  getByProductId: (parent, args, context, info) => {
+    const productId = args.id;
+    return productData.getByProductId(productId);
+  },
 
-const getProductByIdLogic = (parent, args, context, info) => {
-  return getProductByIdData(args.id);
-};
+  getByUserId: (parent, args, context, info) => {
+    const userId = args.userId;
+    return productData.getByUserId(userId);
+  },
 
-const getProductsBySearchTextLogic = (parent, args, context, info) => {
-  return getProductsBySearchTextData(args.searchText);
-};
+  getBySearchText: (parent, args, context, info) => {
+    return productData.getBySearchText(args.searchText);
+  },
 
-const getMultipleProductsLogic = (parent, args, context, info) => {
-  return getMultipleProductsData(args.productIDArray);
-};
+  /* For Mutations */
 
-const addProductLogic = (parent, args, context, info) => {
-  const {
-    productName,
-    productPrice,
-    productDescription,
-    productCategory,
-    productSubCategory,
-    productBrand,
-  } = args;
+  add: (parent, args, context, info) => {
+    const {
+      productName,
+      productPrice,
+      productDescription,
+      productCategory,
+      productSubCategory,
+      productBrand,
+    } = args;
 
-  const newProduct = {
-    productName,
-    productPrice,
-    productDescription,
-    productCategory,
-    productSubCategory,
-    productBrand,
-  };
-  return addProductData(newProduct);
-};
+    return productData.add(
+      productName,
+      productPrice,
+      productDescription,
+      productCategory,
+      productSubCategory,
+      productBrand
+    );
+  },
 
-const updateProductLogic = (parent, args, context, info) => {
-  const productID = args.productID;
+  update: (parent, args, context, info) => {
+    const productID = args.productID;
 
-  const productDetailsToUpdate = {
-    productName: args.productName,
-    productDescription: args.productDescription,
-    productPrice: args.productPrice,
-    productCategory: args.productCategory,
-    productSubCategory: args.productSubCategory,
-    productBrand: args.productBrand,
-  };
+    const {
+      productName,
+      productDescription,
+      productPrice,
+      productCategory,
+      productSubCategory,
+      productBrand,
+    } = args;
 
-  return updateProductData(productID, productDetailsToUpdate);
-};
+    return productData.update(
+      productID,
+      productName,
+      productDescription,
+      productPrice,
+      productCategory,
+      productSubCategory,
+      productBrand
+    );
+  },
 
-const deleteProductLogic = (parent, args, context, info) => {
-  const productID = args.productID;
-  return deleteProductData(productID);
-};
-
-const uploadFileLogic = async (file) => {
-  // const { filename, mimetype, encoding, createReadStream } = await file;
-  // console.log(filename);
-  // try {
-  //   const stream = createReadStream(__dirname);
-  //   console.log(stream);
-  // } catch (error) {
-  //   throw error;
-  // }
-  // return { filename, mimetype, encoding };
+  delete: (parent, args, context, info) => {
+    const productID = args.productID;
+    return productData.delete(productID);
+  },
 };
 
 module.exports = {
-  getAllProductsLogic,
-  getProductByIdLogic,
-  getProductsBySearchTextLogic,
-  getMultipleProductsLogic,
-  addProductLogic,
-  updateProductLogic,
-  deleteProductLogic,
-  uploadFileLogic,
+  productLogic,
 };
