@@ -1,37 +1,25 @@
 const { requiresRole } = require("../../utils/requireRole");
-const {
-  addProductLogic,
-  updateProductLogic,
-  deleteProductLogic,
-  uploadFileLogic,
-} = require("../logic/logic");
+const { productLogic } = require("../logic/logic");
 
-const addProduct = async (parent, args, context, info) => {
-  return addProductLogic(parent, args, context, info);
-};
+const ProductMutationResolvers = {
+  add: (parent, args, context, info) => {
+    return productLogic.add(parent, args, context, info);
+  },
 
-const updateProduct = async (parent, args, context, info) => {
-  return updateProductLogic(parent, args, context, info);
-};
+  update: async (parent, args, context, info) => {
+    return productLogic.update(parent, args, context, info);
+  },
 
-const deleteProduct = async (parent, args, context, info) => {
-  return deleteProductLogic(parent, args, context, info);
-};
-
-const uploadFile = async (parent, { file }, context, info) => {
-  const { createReadStream, filename, mimetype, encoding } = await file;
-
-  // await new Promise((res) => createReadStream().on("close", res));
-
-  return { filename, mimetype, encoding };
+  delete: async (parent, args, context, info) => {
+    return productLogic.delete(parent, args, context, info);
+  },
 };
 
 const ProductMutation = {
   // addProduct: requiresRole("vendor", addProduct), // to make api authorized
-  addProduct,
-  updateProduct,
-  deleteProduct,
-  uploadFile: uploadFile,
+  addProduct: ProductMutationResolvers.add,
+  updateProduct: ProductMutationResolvers.update,
+  deleteProduct: ProductMutationResolvers.delete, // because delete is a keyword in javascript
 };
 
 module.exports = { ProductMutation };

@@ -1,54 +1,86 @@
 const Product = require("../../../models/Products");
 
-const getAllProductsData = async () => {
-  return await Product.find({});
-};
+const productData = {
+  /* For Queries  */
 
-const getProductByIdData = async (id) => {
-  //Need to populate the Product reviews
-  return await Product.findById(id).populate("reviews");
-};
+  getAll: async () => {
+    return await Product.find({});
+  },
 
-const getProductsBySearchTextData = async (searchText) => {
-  return await Product.find({ $text: { $search: searchText } });
-};
+  getByProductId: async (id) => {
+    return await Product.findById(id).populate("reviews"); //Need to populate the Product reviews
+  },
 
-const getMultipleProductsData = async (productIDArray) => {
-  const data = await Product.find({ _id: { $in: productIDArray } });
-  return data;
-};
+  getByUserId: async (userId) => {
+    console.log(userId);
+    return await Product.findById(userId).populate("reviews");
+  },
 
-const addProductData = async (newProduct) => {
-  const productdata = new Product(newProduct);
-  return await productdata.save();
-};
+  getBySearchText: async (searchText) => {
+    return await Product.find({ $text: { $search: searchText } });
+  },
 
-const updateProductData = async (productID, productDetailsToUpdate) => {
-  let updatedProductData = await Product.findOneAndUpdate(
-    { _id: productID },
-    { $set: { ...productDetailsToUpdate } },
-    {
-      new: true,
+  /* For Mutations  */
+
+  add: async (
+    productName,
+    productPrice,
+    productDescription,
+    productCategory,
+    productSubCategory,
+    productBrand
+  ) => {
+    const newProduct = {
+      productName,
+      productPrice,
+      productDescription,
+      productCategory,
+      productSubCategory,
+      productBrand,
+    };
+
+    const productToAdd = new Product(newProduct);
+
+    return await productToAdd.save();
+  },
+
+  update: async (
+    productID,
+    productName,
+    productDescription,
+    productPrice,
+    productCategory,
+    productSubCategory,
+    productBrand
+  ) => {
+    const productDetailsToUpdate = {
+      productName,
+      productDescription,
+      productPrice,
+      productCategory,
+      productSubCategory,
+      productBrand,
+    };
+    let updatedProductData = await Product.findOneAndUpdate(
+      { _id: productID },
+      { $set: { ...productDetailsToUpdate } },
+      {
+        new: true,
+      }
+    );
+    return await updatedProductData.save();
+  },
+
+  delete: async (productID) => {
+    try {
+      const result = await Product.findByIdAndDelete(productID);
+      return result;
+    } catch (error) {
+      return ` Error ${error} `;
     }
-  );
-  return await updatedProductData.save();
-};
-
-const deleteProductData = async (productID) => {
-  try {
-    const result = await Product.findByIdAndDelete(productID);
-    return result;
-  } catch (error) {
-    return ` Error ${error} `;
-  }
+  },
 };
 
 module.exports = {
-  getAllProductsData,
-  getProductByIdData,
-  getProductsBySearchTextData,
-  getMultipleProductsData,
-  addProductData,
-  updateProductData,
-  deleteProductData,
+  productData,
 };

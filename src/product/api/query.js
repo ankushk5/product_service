@@ -1,36 +1,43 @@
-const {
-  getProductByIdLogic,
-  getAllProductsLogic,
-  getMultipleProductsLogic,
-  getProductsBySearchTextLogic,
-} = require("../logic/logic");
+const { productLogic } = require("../logic/logic");
 
-const getAllProducts = () => {
-  return getAllProductsLogic();
-};
+const productQueryResolvers = {
+  /** gettting all products from the product Collection
+   * it will be used in showing products to the EndUser and admin
+   */
+  getAll: () => {
+    return productLogic.getAll();
+  },
 
-const getProductById = (parent, args, context, info) => {
-  return getProductByIdLogic(parent, args, context, info);
-};
+  /**
+   * This will be used to show single product in details
+   * @param {object} args contains productID
+   * @param {object} context
+   * @returns object product single object
+   */
+  getByProductId: (parent, args, context, info) => {
+    return productLogic.getByProductId(parent, args, context, info);
+  },
 
-/**
- * This will search the product from Product Name
- * Partial matching won't work.
- * If any single word from searchText matches any Single Word in Product model then there
- * will an match
- */
-const getProductsBySearchText = (parent, args, context, info) => {
-  return getProductsBySearchTextLogic(parent, args, context, info);
-};
+  /* This will be used to show products for individual vendor */
+  getByUserId: (parent, args, context, info) => {
+    return productLogic.getByUserId(parent, args, context, info);
+  },
 
-const getMultipleProducts = (parent, args, context, info) => {
-  return getMultipleProductsLogic(parent, args, context, info);
+  /**
+   * This will search the product from Product Name , productCategory and productSubCategory
+   * Partial matching won't work.
+   * If any single word from searchText matches any Single Word in Product model then there
+   * will an match
+   */
+  getBySearchText: (parent, args, context, info) => {
+    return productLogic.getBySearchText(parent, args, context, info);
+  },
 };
 
 const ProductQuery = {
-  getAllProducts: getAllProducts,
-  getProductById: getProductById,
-  getProductsBySearchText: getProductsBySearchText,
-  getMultipleProducts: getMultipleProducts,
+  getAllProducts: productQueryResolvers.getAll,
+  getProductByProductId: productQueryResolvers.getByProductId,
+  getProductByUserId: productQueryResolvers.getByUserId,
+  getProductsBySearchText: productQueryResolvers.getBySearchText,
 };
 module.exports = { ProductQuery };
