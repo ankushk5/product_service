@@ -11,9 +11,9 @@ const productLogic = {
     return productData.getByProductId(productId);
   },
 
-  getByUserId: (parent, args, context, info) => {
-    const userId = args.userId;
-    return productData.getByUserId(userId);
+  getByVendorId: (parent, args, context, info) => {
+    const vendorId = args.vendorId;
+    return productData.getByVendorId(vendorId);
   },
 
   getBySearchText: (parent, args, context, info) => {
@@ -30,6 +30,7 @@ const productLogic = {
       productCategory,
       productSubCategory,
       productBrand,
+      productImageUrl,
     } = args;
 
     return productData.add(
@@ -38,7 +39,8 @@ const productLogic = {
       productDescription,
       productCategory,
       productSubCategory,
-      productBrand
+      productBrand,
+      productImageUrl
     );
   },
 
@@ -52,6 +54,7 @@ const productLogic = {
       productCategory,
       productSubCategory,
       productBrand,
+      productImageUrl,
     } = args;
 
     return productData.update(
@@ -61,7 +64,8 @@ const productLogic = {
       productPrice,
       productCategory,
       productSubCategory,
-      productBrand
+      productBrand,
+      productImageUrl
     );
   },
 

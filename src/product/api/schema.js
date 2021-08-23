@@ -1,8 +1,6 @@
 const { gql } = require("apollo-server-express");
 
 const ProductSchema = gql`
-  scalar Upload
-
   type ProductCategory {
     categoryId: Int
     categoryName: String
@@ -15,39 +13,38 @@ const ProductSchema = gql`
 
   type Product @key(fields: "id") {
     id: ID
+    vendorId: String
     productName: String
     productDescription: String
     productPrice: Int
     productCategory: ProductCategory
     productSubCategory: String
     productBrand: String
+    productImageUrl: String
     reviews: [Review]
-  }
-
-  type File {
-    filename: String!
-    mimetype: String!
-    encoding: String!
   }
 
   extend type Query {
     getAllProducts: [Product]
     getProductByProductId(id: ID!): Product
-    getProductByUserId(userId: String!): Product
+    getProductByVendorId(vendorId: String!): [Product]
     getProductsBySearchText(searchText: String!): [Product]
   }
 
   extend type Mutation {
     addProduct(
+      vendorId: String!
       productName: String
       productDescription: String
       productPrice: Int
       productCategory: ProductCategoryInput
       productSubCategory: String
       productBrand: String
+      productImageUrl: String
     ): Product
 
     updateProduct(
+      vendorId: String!
       productID: ID
       productName: String
       productDescription: String
@@ -55,11 +52,10 @@ const ProductSchema = gql`
       productCategory: ProductCategoryInput
       productSubCategory: String
       productBrand: String
+      productImageUrl: String
     ): Product
 
     deleteProduct(productID: ID): Product
-
-    uploadFile(file: Upload!): File!
   }
 `;
 module.exports = { ProductSchema };

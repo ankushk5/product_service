@@ -19,8 +19,8 @@ const productQueryResolvers = {
   },
 
   /* This will be used to show products for individual vendor */
-  getByUserId: (parent, args, context, info) => {
-    return productLogic.getByUserId(parent, args, context, info);
+  getByVendorId: (parent, args, context, info) => {
+    return productLogic.getByVendorId(parent, args, context, info);
   },
 
   /**
@@ -37,7 +37,7 @@ const productQueryResolvers = {
 const ProductQuery = {
   getAllProducts: productQueryResolvers.getAll,
   getProductByProductId: productQueryResolvers.getByProductId,
-  getProductByUserId: productQueryResolvers.getByUserId,
+  getProductByVendorId: productQueryResolvers.getByVendorId,
   getProductsBySearchText: productQueryResolvers.getBySearchText,
 };
 module.exports = { ProductQuery };

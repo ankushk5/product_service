@@ -1,16 +1,18 @@
-const { getCartLogic, getCartItemByProductIdLogic } = require("../logic/logic");
+const { cartLogic } = require("../logic/logic");
 
-const getCart = () => {
-  return getCartLogic();
-};
+const CartQueryResolvers = {
+  getAll: () => {
+    return cartLogic.getAll();
+  },
 
-const getCartItemByProductId = (parent, args, context, info) => {
-  return getCartItemByProductIdLogic(parent, args, context, info);
+  getByProductId: (parent, args, context, info) => {
+    return cartLogic.getByProductId(parent, args, context, info);
+  },
 };
 
 const CartQuery = {
-  getCart: getCart,
-  getCartItemByProductId: getCartItemByProductId,
+  getCart: CartQueryResolvers.getAll,
+  getCartItemByProductId: CartQueryResolvers.getByProductId,
 };
 
 module.exports = { CartQuery };
