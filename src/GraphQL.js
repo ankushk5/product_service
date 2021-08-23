@@ -1,11 +1,9 @@
-const { GraphQLUpload } = require("graphql-upload");
-
 const { ProductMutation } = require("./product/api/mutation");
 const { ProductQuery } = require("./product/api/query");
 const { CartQuery } = require("./cart/api/query");
 const { CartMutation } = require("./cart/api/mutation");
 const { ReviewMutation } = require("./review/api/mutation");
-const { getProductByIdData } = require("./product/data/data");
+const { productData } = require("./product/data/data");
 
 const resolvers = {
   Query: {
@@ -24,12 +22,10 @@ const resolvers = {
    */
   Product: {
     __resolveReference(ref) {
-      return getProductByIdData(ref.id);
+      // console.log(ref.id);
+      return productData.getByProductId(ref.id);
     },
   },
-
-  /** to upload file , we add this as a scaler in the schema  */
-  Upload: GraphQLUpload,
 };
 
 module.exports = { resolvers };

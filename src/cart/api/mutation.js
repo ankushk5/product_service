@@ -1,25 +1,25 @@
-const {
-  addToCartLogic,
-  updateCartQuantityLogic,
-  deleteCartLogic,
-} = require("../logic/logic");
+const { cartLogic } = require("../logic/logic");
 
-const addToCart = async (parent, args, context, info) => {
-  return addToCartLogic(parent, args, context, info);
+const CartMutationResolvers = {
+  add: async (parent, args, context, info) => {
+    return cartLogic.add(parent, args, context, info);
+  },
+
+  updateQuantity: async (parent, args, context, info) => {
+    return cartLogic.updateQuantity(parent, args, context, info);
+  },
+
+  delete: async (parent, args, context, info) => {
+    return cartLogic.delete(parent, args, context, info);
+  },
 };
 
-const updateCartQuantity = async (parent, args, context, info) => {
-  return updateCartQuantityLogic(parent, args, context, info);
-};
-
-const deleteCart = async (parent, args, context, info) => {
-  return deleteCartLogic(parent, args, context, info);
-};
+const { add, updateQuantity } = CartMutationResolvers;
 
 const CartMutation = {
-  addToCart: addToCart,
-  updateCartQuantity: updateCartQuantity,
-  deleteCart: deleteCart,
+  addToCart: add,
+  updateCartQuantity: updateQuantity,
+  deleteCart: CartMutationResolvers.delete, // because delete is a keyword
 };
 
 module.exports = { CartMutation };

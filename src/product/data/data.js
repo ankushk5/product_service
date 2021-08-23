@@ -11,9 +11,9 @@ const productData = {
     return await Product.findById(id).populate("reviews"); //Need to populate the Product reviews
   },
 
-  getByUserId: async (userId) => {
-    console.log(userId);
-    return await Product.findById(userId).populate("reviews");
+  getByVendorId: async (vendorId) => {
+    console.log(vendorId);
+    return await Product.find({ vendorId });
   },
 
   getBySearchText: async (searchText) => {
@@ -28,7 +28,8 @@ const productData = {
     productDescription,
     productCategory,
     productSubCategory,
-    productBrand
+    productBrand,
+    productImageUrl
   ) => {
     const newProduct = {
       productName,
@@ -37,6 +38,7 @@ const productData = {
       productCategory,
       productSubCategory,
       productBrand,
+      productImageUrl,
     };
 
     const productToAdd = new Product(newProduct);
@@ -51,7 +53,8 @@ const productData = {
     productPrice,
     productCategory,
     productSubCategory,
-    productBrand
+    productBrand,
+    productImageUrl
   ) => {
     const productDetailsToUpdate = {
       productName,
@@ -60,6 +63,7 @@ const productData = {
       productCategory,
       productSubCategory,
       productBrand,
+      productImageUrl,
     };
     let updatedProductData = await Product.findOneAndUpdate(
       { _id: productID },
