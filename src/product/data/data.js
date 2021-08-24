@@ -12,7 +12,7 @@ const productData = {
   },
 
   getByVendorId: async (vendorId) => {
-    console.log(vendorId);
+    // console.log(vendorId);
     return await Product.find({ vendorId });
   },
 
@@ -23,6 +23,7 @@ const productData = {
   /* For Mutations  */
 
   add: async (
+    vendor_Id,
     productName,
     productPrice,
     productDescription,
@@ -32,6 +33,7 @@ const productData = {
     productImageUrl
   ) => {
     const newProduct = {
+      vendor_Id,
       productName,
       productPrice,
       productDescription,
@@ -47,6 +49,7 @@ const productData = {
   },
 
   update: async (
+    vendor_Id,
     productID,
     productName,
     productDescription,
@@ -57,6 +60,7 @@ const productData = {
     productImageUrl
   ) => {
     const productDetailsToUpdate = {
+      vendor_Id,
       productName,
       productDescription,
       productPrice,
@@ -65,6 +69,7 @@ const productData = {
       productBrand,
       productImageUrl,
     };
+
     let updatedProductData = await Product.findOneAndUpdate(
       { _id: productID },
       { $set: { ...productDetailsToUpdate } },
@@ -72,6 +77,7 @@ const productData = {
         new: true,
       }
     );
+
     return await updatedProductData.save();
   },
 

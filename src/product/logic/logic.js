@@ -12,7 +12,7 @@ const productLogic = {
   },
 
   getByVendorId: (parent, args, context, info) => {
-    const vendorId = args.vendorId;
+    const vendorId = context.user.public_Id;
     return productData.getByVendorId(vendorId);
   },
 
@@ -23,6 +23,8 @@ const productLogic = {
   /* For Mutations */
 
   add: (parent, args, context, info) => {
+    const { public_Id: vendor_Id } = context.user.public_Id;
+
     const {
       productName,
       productPrice,
@@ -34,6 +36,7 @@ const productLogic = {
     } = args;
 
     return productData.add(
+      vendor_Id,
       productName,
       productPrice,
       productDescription,
@@ -45,9 +48,10 @@ const productLogic = {
   },
 
   update: (parent, args, context, info) => {
-    const productID = args.productID;
+    const { public_Id: vendor_Id } = context.user.public_Id;
 
     const {
+      productID,
       productName,
       productDescription,
       productPrice,
@@ -58,6 +62,7 @@ const productLogic = {
     } = args;
 
     return productData.update(
+      vendor_Id,
       productID,
       productName,
       productDescription,

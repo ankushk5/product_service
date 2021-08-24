@@ -27,13 +27,13 @@ const ProductSchema = gql`
   extend type Query {
     getAllProducts: [Product]
     getProductByProductId(id: ID!): Product
-    getProductByVendorId(vendorId: String!): [Product]
+    getProductByVendorId: [Product] # vendor id comes from context
     getProductsBySearchText(searchText: String!): [Product]
   }
 
   extend type Mutation {
     addProduct(
-      vendorId: String!
+      #vendorId: String! // this will come from context
       productName: String
       productDescription: String
       productPrice: Int
@@ -44,7 +44,7 @@ const ProductSchema = gql`
     ): Product
 
     updateProduct(
-      vendorId: String!
+      #vendorId: String! // this will come from context
       productID: ID
       productName: String
       productDescription: String
