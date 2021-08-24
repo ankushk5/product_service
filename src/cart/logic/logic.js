@@ -1,8 +1,13 @@
 const { cartData } = require("../data/data");
 
 const cartLogic = {
-  getAll: () => {
+  getAll: (parent, args, context, info) => {
     return cartData.getAll();
+  },
+
+  getByCustomerId: (parent, args, context, info) => {
+    const customerId = context.user.public_id;
+    return cartData.getByCustomerId(customerId);
   },
 
   getByProductId: (parent, args, context, info) => {
@@ -10,21 +15,16 @@ const cartLogic = {
   },
 
   add: (parent, args, context, info) => {
-    const cartItem = {
-      productID: args.productID,
-      productName: args.productName,
-      productDescription: args.productDescription,
-      productPrice: args.productPrice,
-    };
-    return cartData.add(cartItem, args.productID);
+    const { productID } = args;
+    const customerId = context.user.public_id;
+
+    return cartData.add(productID, customerId);
   },
 
   updateQuantity: (parent, args, context, info) => {
-    const cartID = args.cartID;
-    const updatedCart = {
-      quantity: args.quantity,
-    };
-    return cartData.updateQuantity(cartID, updatedCart);
+    const { cartID, quantity } = args;
+
+    return cartData.updateQuantity(cartID, quantity);
   },
 
   delete: (parent, args, context, info) => {
