@@ -23,12 +23,13 @@ const cartData = {
       throw Error("Already Added To Cart");
     }
 
-    const cartItemData = await new Cart({
+    const cartItemData = new Cart({
       productData: productID,
       customerId,
     });
 
-    return await cartItemData.save();
+    const addedCart = await cartItemData.save(); // can't use populate here, will give error
+    return addedCart.populate("productData").execPopulate(); // need to execute the populate function
   },
 
   updateQuantity: async (cartID, quantity) => {
@@ -38,13 +39,16 @@ const cartData = {
       {
         new: true,
       }
-    );
+    ).populate("productData");
     return updatedCartData;
   },
 
   delete: async (cartID) => {
     try {
-      const result = await Cart.findByIdAndDelete(cartID);
+      const result = await Cart.findByIdAndDelete(cartID).populate(
+        "productData"
+      );
+
       return result;
     } catch (error) {
       return ` Error ${error} `;

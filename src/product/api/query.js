@@ -1,3 +1,4 @@
+const { requiresRole } = require("../../utils/requireRole");
 const { productLogic } = require("../logic/logic");
 
 const productQueryResolvers = {
@@ -37,7 +38,10 @@ const productQueryResolvers = {
 const ProductQuery = {
   getAllProducts: productQueryResolvers.getAll,
   getProductByProductId: productQueryResolvers.getByProductId,
-  getProductByVendorId: productQueryResolvers.getByVendorId,
+  getProductsByVendorId: requiresRole(
+    "vendor",
+    productQueryResolvers.getByVendorId
+  ), // to make api authorized
   getProductsBySearchText: productQueryResolvers.getBySearchText,
 };
 module.exports = { ProductQuery };
