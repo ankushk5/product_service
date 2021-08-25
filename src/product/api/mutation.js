@@ -6,6 +6,7 @@ const ProductMutationResolvers = {
     return productLogic.add(parent, args, context, info);
   },
 
+  /** updating using Product Id */
   update: async (parent, args, context, info) => {
     return productLogic.update(parent, args, context, info);
   },

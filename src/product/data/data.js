@@ -12,8 +12,7 @@ const productData = {
   },
 
   getByVendorId: async (vendorId) => {
-    // console.log(vendorId);
-    return await Product.find({ vendorId });
+    return await Product.find({ vendorId }).populate("reviews");
   },
 
   getBySearchText: async (searchText) => {
@@ -23,7 +22,7 @@ const productData = {
   /* For Mutations  */
 
   add: async (
-    vendor_Id,
+    vendorId,
     productName,
     productPrice,
     productDescription,
@@ -33,7 +32,7 @@ const productData = {
     productImageUrl
   ) => {
     const newProduct = {
-      vendor_Id,
+      vendorId,
       productName,
       productPrice,
       productDescription,
@@ -49,7 +48,6 @@ const productData = {
   },
 
   update: async (
-    vendor_Id,
     productID,
     productName,
     productDescription,
@@ -60,7 +58,6 @@ const productData = {
     productImageUrl
   ) => {
     const productDetailsToUpdate = {
-      vendor_Id,
       productName,
       productDescription,
       productPrice,
