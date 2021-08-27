@@ -1,3 +1,4 @@
+const { requiresRole } = require("../../utils/requireRole");
 const { cartLogic } = require("../logic/logic");
 
 const CartMutationResolvers = {
@@ -17,9 +18,9 @@ const CartMutationResolvers = {
 const { add, updateQuantity } = CartMutationResolvers;
 
 const CartMutation = {
-  addToCart: add,
-  updateCartQuantity: updateQuantity,
-  deleteCart: CartMutationResolvers.delete, // because delete is a keyword
+  addToCart: requiresRole("customer", add),
+  updateCartQuantity: requiresRole("customer", updateQuantity),
+  deleteCart: requiresRole("customer", CartMutationResolvers.delete), // because delete is a keyword
 };
 
 module.exports = { CartMutation };

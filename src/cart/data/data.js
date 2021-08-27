@@ -6,7 +6,10 @@ const cartData = {
   },
 
   getByCustomerId: async (customerId) => {
-    return await Cart.find({ customerId: customerId }).populate("productData");
+    const cartData = await Cart.find({ customerId: customerId }).populate(
+      "productData"
+    );
+    return cartData;
   },
 
   getByProductId: async (productID) => {

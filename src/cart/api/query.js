@@ -1,3 +1,4 @@
+const { requiresRole } = require("../../utils/requireRole");
 const { cartLogic } = require("../logic/logic");
 
 const CartQueryResolvers = {
@@ -14,10 +15,13 @@ const CartQueryResolvers = {
   },
 };
 
+/** destructuring Resolver functions */
+const { getAll, getByCustomerId, getByProductId } = CartQueryResolvers;
+
 const CartQuery = {
-  getCart: CartQueryResolvers.getAll,
-  getCartByCustomerId: CartQueryResolvers.getByCustomerId,
-  getCartByProductId: CartQueryResolvers.getByProductId,
+  getCart: requiresRole("admin", getAll), // this should not exist (may be in future)
+  getCartByCustomerId: requiresRole("customer", getByCustomerId), // customer endpoint
+  getCartByProductId: requiresRole("customer", getByProductId), // customer endpoint (till now no use)
 };
 
 module.exports = { CartQuery };

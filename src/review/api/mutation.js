@@ -1,23 +1,24 @@
-const {
-  addReviewLogic,
-  updateReviewLogic,
-  deleteReviewLogic,
-} = require("../logic/logic");
+const { requiresRole } = require("../../utils/requireRole");
+const { ReviewLogic } = require("../logic/logic");
 
-const addReview = (parent, args, context, info) => {
-  return addReviewLogic(parent, args, context, info);
+const ReviewMutationResolvers = {
+  add: (parent, args, context, info) => {
+    return ReviewLogic.add(parent, args, context, info);
+  },
+  update: (parent, args, context, info) => {
+    return ReviewLogic.update(parent, args, context, info);
+  },
+  delete: (parent, args, context, info) => {
+    return ReviewLogic.delete(parent, args, context, info);
+  },
 };
-const updateReview = (parent, args, context, info) => {
-  return updateReviewLogic(parent, args, context, info);
-};
-const deleteReview = (parent, args, context, info) => {
-  return deleteReviewLogic(parent, args, context, info);
-};
+
+const { add, update } = ReviewMutationResolvers;
 
 const ReviewMutation = {
-  addReview: addReview,
-  updateReview: updateReview,
-  deleteReview: deleteReview,
+  addReview: requiresRole("customer", add),
+  updateReview: requiresRole("customer", update),
+  deleteReview: requiresRole("customer", ReviewMutationResolvers.delete),
 };
 
 module.exports = { ReviewMutation };
