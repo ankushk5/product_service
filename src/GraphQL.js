@@ -4,11 +4,13 @@ const { CartQuery } = require("./cart/api/query");
 const { CartMutation } = require("./cart/api/mutation");
 const { ReviewMutation } = require("./review/api/mutation");
 const { productData } = require("./product/data/data");
+const { ReviewQuery } = require("./review/api/query");
 
 const resolvers = {
   Query: {
     ...ProductQuery,
     ...CartQuery,
+    ...ReviewQuery,
   },
   Mutation: {
     ...ProductMutation,

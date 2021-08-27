@@ -1,31 +1,34 @@
-const {
-  addReviewData,
-  updateReviewData,
-  deleteReviewData,
-} = require("../data/data");
+const { ReviewData } = require("../data/data");
 
-const addReviewLogic = (parent, args, context, info) => {
-  const newReview = {
-    productID: args.productID,
-    review: args.review,
-    rating: args.rating,
-  };
-  return addReviewData(newReview);
+const ReviewLogic = {
+  /** For queries */
+  getByCustomerId: (parent, args, context, info) => {
+    const customerId = context.user.public_id;
+    return ReviewData.getByCustomerId(customerId);
+  },
+
+  /** For mutations */
+  add: (parent, args, context, info) => {
+    const { productID, review, rating } = args;
+    const customerId = context.user.public_id;
+    return ReviewData.add(productID, customerId, review, rating);
+  },
+
+  update: (parent, args, context, info) => {
+    const reviewID = args.id;
+
+    const updatedReview = {
+      review: args.review,
+      rating: args.rating,
+    };
+    return ReviewData.update(reviewID, updatedReview);
+  },
+
+  delete: (parent, args, context, info) => {
+    const reviewID = args.id;
+    const productID = args.productID;
+    return ReviewData.delete(reviewID, productID);
+  },
 };
 
-const updateReviewLogic = (parent, args, context, info) => {
-  const reviewID = args.id;
-  const updatedReview = {
-    review: args.review,
-    rating: args.rating,
-  };
-  return updateReviewData(reviewID, updatedReview);
-};
-
-const deleteReviewLogic = (parent, args, context, info) => {
-  const reviewID = args.id;
-  const productID = args.productID;
-  return deleteReviewData(reviewID, productID);
-};
-
-module.exports = { addReviewLogic, updateReviewLogic, deleteReviewLogic };
+module.exports = { ReviewLogic };

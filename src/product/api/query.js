@@ -35,13 +35,14 @@ const productQueryResolvers = {
   },
 };
 
+/** destructuring Resolver functions */
+const { getAll, getByProductId, getByVendorId, getBySearchText } =
+  productQueryResolvers;
+
 const ProductQuery = {
-  getAllProducts: productQueryResolvers.getAll,
-  getProductByProductId: productQueryResolvers.getByProductId,
-  getProductsByVendorId: requiresRole(
-    "vendor",
-    productQueryResolvers.getByVendorId
-  ), // to make api authorized
-  getProductsBySearchText: productQueryResolvers.getBySearchText,
+  getAllProducts: getAll, // admin endpoint + public endpoint
+  getProductByProductId: getByProductId, // public endpoint
+  getProductsByVendorId: requiresRole("vendor", getByVendorId), // vendor endpoint
+  getProductsBySearchText: getBySearchText, // public endpoint
 };
 module.exports = { ProductQuery };
