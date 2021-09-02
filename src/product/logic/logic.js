@@ -3,8 +3,8 @@ const { productData } = require("../data/data");
 const productLogic = {
   /* For Queries */
 
-  getAll: () => {
-    return productData.getAll();
+  getAll: (parent, args, context, info) => {
+    return productData.getAll(args.limit, args.cursor);
   },
   getByProductId: (parent, args, context, info) => {
     const productId = args.id;

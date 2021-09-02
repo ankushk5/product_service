@@ -25,7 +25,7 @@ const ProductSchema = gql`
   }
 
   extend type Query {
-    getAllProducts: [Product]
+    getAllProducts(limit: Int, cursor: ID): [Product]
     getProductByProductId(id: ID!): Product
     getProductsByVendorId: [Product] # vendor id comes from context
     getProductsBySearchText(searchText: String!): [Product]
