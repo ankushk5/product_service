@@ -1,12 +1,13 @@
 const { requiresRole } = require("../../utils/requireRole");
+const { productData } = require("../data/data");
 const { productLogic } = require("../logic/logic");
 
 const productQueryResolvers = {
   /** gettting all products from the product Collection
    * it will be used in showing products to the EndUser and admin
    */
-  getAll: () => {
-    return productLogic.getAll();
+  getAll: (parent, args, context, info) => {
+    return productLogic.getAll(parent, args, context, info);
   },
 
   /**

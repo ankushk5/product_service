@@ -3,8 +3,33 @@ const Product = require("../../../models/Products");
 const productData = {
   /* For Queries  */
 
-  getAll: async () => {
-    return await Product.find({});
+  /**
+   * We are getting products using pagination
+   * @param {Number} limit max No of Products need to return
+   * @param {ObjectId} cursor
+   * @returns no of required products
+   */
+  getAll: async (limit, cursor) => {
+    // using offset and limit
+    // const data = await Product.find({})
+    //   .limit(parseInt(limit))
+    //   .skip(parseInt(cursor));
+
+    // using cursor
+    let productData;
+
+    /** for intial query */
+    if (cursor === null) {
+      productData = await Product.find({}).limit(parseInt(limit));
+    }
+    // for next queries when we set the cursor
+    else {
+      productData = await Product.find({ _id: { $gt: cursor } }).limit(
+        parseInt(limit)
+      );
+    }
+
+    return productData;
   },
 
   getByProductId: async (id) => {
