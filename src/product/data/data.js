@@ -41,7 +41,9 @@ const productData = {
   },
 
   getBySearchText: async (searchText) => {
-    return await Product.find({ $text: { $search: searchText } });
+    return await Product.find({ $text: { $search: searchText } }).populate(
+      "reviews"
+    );
   },
 
   /* For Mutations  */

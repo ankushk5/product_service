@@ -31,6 +31,11 @@ const cartLogic = {
     const cartID = args.cartID;
     return cartData.delete(cartID);
   },
+
+  deleteByCustomerId: (parent, args, context, info) => {
+    const customerId = context.user.public_id;
+    return cartData.deleteByCustomerId(customerId);
+  },
 };
 
 module.exports = {

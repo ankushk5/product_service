@@ -21,7 +21,10 @@ const ProductMutation = {
   addProduct: requiresRole("vendor", ProductMutationResolvers.add), //vendor endpoint
   updateProduct: requiresRole("vendor", ProductMutationResolvers.update), //vendor endpoint + admin endpoint
   // because delete is a keyword in javascript
-  deleteProduct: requiresRole("vendor", ProductMutationResolvers.delete), //vendor endpoint + admin endpoint
+  deleteProduct: requiresRole(
+    ["vendor", "admin"],
+    ProductMutationResolvers.delete
+  ), //vendor endpoint + admin endpoint
 };
 
 module.exports = { ProductMutation };

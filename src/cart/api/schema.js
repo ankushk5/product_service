@@ -18,6 +18,7 @@ const CartSchema = gql`
     addToCart(productID: ID): Cart #customerId comes from context
     updateCartQuantity(cartID: ID, quantity: Int): Cart
     deleteCart(cartID: ID): Cart
+    clearCartByCustomerId: String
   }
 `;
 module.exports = { CartSchema };

@@ -57,6 +57,15 @@ const cartData = {
       return ` Error ${error} `;
     }
   },
+
+  deleteByCustomerId: async (customerId) => {
+    try {
+      const result = await Cart.deleteMany({ customerId });
+      return "Cart Cleared Successfully";
+    } catch (error) {
+      return ` Error ${error} `;
+    }
+  },
 };
 
 module.exports = {
