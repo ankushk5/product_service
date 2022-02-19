@@ -9,6 +9,7 @@ const { ReviewSchema } = require("./src/review/api/schema");
 const { resolvers } = require("./src/GraphQL");
 const { mergeTypes } = require("merge-graphql-schemas");
 const { graphqlUploadExpress } = require("graphql-upload");
+const routers = require("./src/REST");
 
 app.use(cors());
 
@@ -22,6 +23,9 @@ connectDB();
 const typeDefs = gql`
   ${mergeTypes([ProductSchema, CartSchema, ReviewSchema])}
 `;
+
+
+app.use("/", routers);
 
 const apolloServer = new ApolloServer({
   schema: buildFederatedSchema([{ typeDefs: typeDefs, resolvers: resolvers }]),
