@@ -19,11 +19,11 @@
  ```bash
   npm install 
  ```
- **3. Now start the node server together by running the following command :-**
+ **3. Now start the node server by running the following command :-**
  ```bash
   node server.js
  ```
- **4.** **🎉  Open your browser and go to following for graphQL playground to test GraphQL apis :-**
+ **4.** **🎉  Open your browser and go to following url to run graphQL-Playground for testing GraphQL apis :-**
  ```bash
   http://localhost:4001/graphql
  ```
