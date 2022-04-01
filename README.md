@@ -19,11 +19,11 @@
  ```bash
   npm install 
  ```
- **3. Now start the react and node server together by running the following command :-**
+ **3. Now start the node server together by running the following command :-**
  ```bash
   node server.js
  ```
- **4.** **🎉  Open your browser and go to following for graphQL playground to test GraphQL apis**
+ **4.** **🎉  Open your browser and go to following for graphQL playground to test GraphQL apis :-**
  ```bash
   http://localhost:4001/graphql
  ```
