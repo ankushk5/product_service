@@ -17,7 +17,6 @@
  
  **2. Now install all the required packages by running the following commands :-**
  ```bash
-  npm init -y
   npm install 
  ```
  **3. Now start the react and node server together by running the following command :-**
