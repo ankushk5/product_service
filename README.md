@@ -1,11 +1,31 @@
-# Product Service 
+## Product Microservice 
 
-## Clone this repo
+**This mircroservice is responsible for :**
 
-## Run **NPM INSTALL** to install dependencies
+ - Add, update and delete products.
+ - Add product to the cart.
+ - update, delete and change quantity of the products in cart.
+ - Add, update and delete reviews on the products.
 
-## Run NPM RUN SERVER to start the server
+### Installation
 
-## Enter localhost:4001/product url in browser or postman to check service is running or not
-
-## localhost:4001/graphql is the url for graphiql interface for running query and mutation
+**1. Clone this repo by running the following command :-**
+ ```bash
+  git clone https://github.com/Ankush-0694/product_service
+  cd product_service
+ ```
+ 
+ **2. Now install all the required packages by running the following commands :-**
+ ```bash
+  npm init -y
+  npm install 
+ ```
+ **3. Now start the react and node server together by running the following command :-**
+ ```bash
+  node server.js
+ ```
+ **4.** **🎉  Open your browser and go to following for graphQL playground to test GraphQL apis**
+ ```bash
+  http://localhost:4001/graphql
+ ```
+ 
