@@ -40,15 +40,17 @@ const apolloServer = new ApolloServer({
 
 app.use(graphqlUploadExpress());
 
+const PORT = process.env.PORT || 8080
+
 async function startServer() {
   await apolloServer.start();
 
   apolloServer.applyMiddleware({ app });
-
-  await app.listen({ port: 4001 });
+  
+  await app.listen({ port: PORT });
 
   console.log(
-    `🚀 Server ready at http://localhost:4001${apolloServer.graphqlPath}`
+    `🚀 Server ready at http://localhost:${PORT + apolloServer.graphqlPath}`
   );
 }
 

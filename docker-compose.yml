@@ -1,0 +1,14 @@
+version: "2"
+services:
+  web:
+    container_name: product_service
+    build: .
+    ports:
+      - "4001:8080"
+    links:
+      - mongo
+  mongo:
+    container_name: product_mongo
+    image: mongo
+    ports:
+      - "27017:27017"

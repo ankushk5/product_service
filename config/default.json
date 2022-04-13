@@ -1,3 +1,3 @@
 {
-  "mongoURI": "mongodb://localhost/testproject1"
+  "mongoURI": "mongodb://mongo/testproject1"
 }
