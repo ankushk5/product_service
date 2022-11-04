@@ -1,4 +1,4 @@
-FROM meetingbooking/user_service:1.0
+FROM node:12
 
 WORKDIR /app
 
@@ -8,8 +8,8 @@ RUN npm install
 
 COPY . . 
 
-ENV PORT=8080
+ENV PORT=4001
 
-EXPOSE 8080
+EXPOSE 4001
 
 CMD ["npm", "run", "server"]

@@ -24,7 +24,6 @@ const typeDefs = gql`
   ${mergeTypes([ProductSchema, CartSchema, ReviewSchema])}
 `;
 
-
 app.use("/", routers);
 
 const apolloServer = new ApolloServer({
@@ -40,13 +39,13 @@ const apolloServer = new ApolloServer({
 
 app.use(graphqlUploadExpress());
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 4001;
 
 async function startServer() {
   await apolloServer.start();
 
   apolloServer.applyMiddleware({ app });
-  
+
   await app.listen({ port: PORT });
 
   console.log(

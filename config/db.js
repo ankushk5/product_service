@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
-const config = require("config");
-const db = config.get("mongoURI");
+require('dotenv').config();
+
+const db_URL = 
+  process.env.NODE_ENV === "dev"?
+  process.env.MONGO_DEV_URL : 
+  process.env.MONGO_PROD_URL ;
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(db, {
+    await mongoose.connect(db_URL, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: false,
@@ -14,7 +18,6 @@ const connectDB = async () => {
     console.log("Product Service's MongoDB Connected...");
   } catch (err) {
     console.error(err.message);
-    // Exit process with failure
     process.exit(1);
   }
 };
